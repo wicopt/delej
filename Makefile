@@ -18,3 +18,5 @@ db-logs:
 
 restart:
 	docker compose restart
+auth-db:
+	docker exec -it delej-auth-db-1  psql -U delej -d auth
