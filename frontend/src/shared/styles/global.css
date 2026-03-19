@@ -1,0 +1,59 @@
+@import './variables.css';
+/* Глобальные стили для проекта, их можно дополнять и менять по желанию */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  font-family: 'IBM Plex Mono';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+picture {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+a {
+  color: currentColor;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+button,
+button:active,
+button:focus {
+  outline: none;        /* убирает контур фокуса (обычно синий) */
+  background-color: transparent; 
+}
+input, textarea, select, button {
+  font: inherit; 
+  border: none;  
+  outline: none; 
+}
+
+
+:focus-visible {
+  outline: 2px solid rgb(123, 123, 224);
+}

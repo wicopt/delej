@@ -1,0 +1,26 @@
+.custom-button {
+  padding: 0.2em 1.5em;
+  border: none;
+  border-radius: 30px;
+  font-size: clamp(1rem, 1vw + 0.5rem, 2rem);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.custom-button--primary {
+  background-color: var(--accent-color);
+  color: var(--text-accent-button-color);
+}
+.custom-button--primary:hover,
+.custom-button--primary:focus {
+  background-color: var(--accent-color-darker);
+}
+.custom-button--secondary {
+  background-color: var(--basic-color);
+  color: var(--text-basic-button-color);
+}
+.custom-button--secondary:hover,
+.custom-button--secondary:focus{
+  background-color: var(--basic-color-darker);
+  color: var(--text-basic-button-color);
+}
