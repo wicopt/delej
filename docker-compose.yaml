@@ -1,0 +1,37 @@
+# docker-compose.yml
+services:
+  # ========== AUTH SERVICE ==========
+  auth-service:
+    build: ./backend/auth-service
+    ports:
+      - "3001:3000"
+    environment:
+       DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@auth-db:5432/${DB_NAME}
+    develop:
+      watch:
+        - action: sync
+          path: ./backend/auth-service
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./backend/auth-service/package.json
+    depends_on:
+      auth-db:
+        condition: service_healthy
+
+  auth-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - auth-data:/var/lib/postgresql/data
+volumes:
+  auth-data:
