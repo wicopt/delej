@@ -6,7 +6,7 @@ const options = {
   // 1. Говорим, где искать токен (в заголовке Authorization)
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   // 2. Секретный ключ
-  secretOrKey: process.env.JWT_ACCESS_SECRET,
+  secretOrKey: 123,
 };
 
 // Стратегия вызывается каждый раз, когда приходит запрос с токеном

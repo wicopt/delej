@@ -1,11 +1,13 @@
 const express = require("express")
 const {pool} = require("./config/dbConfig")
+const passport = require("./config/PassportConfig")
 const registrationRoutes = require("./routes/registration")
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize())
 
 app.get("/", (req, res) => {
     res.send("hi there!")

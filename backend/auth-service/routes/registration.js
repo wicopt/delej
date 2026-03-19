@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { pool } = require("../config/dbConfig");
 const bcrypt = require("bcrypt");
+const UserModel = require('../models/UserModel');
 
 // JSON endpoint для регистрации
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   let {
     username,
     name,
@@ -42,20 +42,14 @@ router.post("/register", async (req, res) => {
   // Если валидация прошла успешно
   try {
     // Проверка существующего пользователя
-    const usernameCheck = await pool.query(
-      `SELECT * FROM users WHERE username = $1`,
-      [username]
-    );
-    const emailCheck = await pool.query(
-      `SELECT * FROM users WHERE email = $1`,
-      [email]
-    );
+    const existingUser = await UserModel.findByEmail(email);
+    const existingUsername = await UserModel.findByUsername(username);
     
-    if (usernameCheck.rows.length > 0 || emailCheck.rows.length > 0) {
+    if (existingUser || existingUsername) {
       let message = "";
-      if (usernameCheck.rows.length > 0 && emailCheck.rows.length > 0) {
+      if (existingUser && existingUsername) {
         message = "Username and email already registered";
-      } else if (usernameCheck.rows.length > 0) {
+      } else if (existingUsername) {
         message = "Username already registered";
       } else {
         message = "Email already registered";
@@ -68,23 +62,24 @@ router.post("/register", async (req, res) => {
       });
     }
 
-    // Хешируем пароль и создаем пользователя
+    // Хешируем пароль
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const newUser = await pool.query(
-      `INSERT INTO users (username, name, email, password_hash)
-       VALUES ($1, $2, $3, $4)
-       RETURNING user_id, username, name, email`,
-      [username, name, email, hashedPassword]
-    );
+    // Создаем пользователя через модель
+    const newUser = await UserModel.create({ 
+      username, 
+      name, 
+      email, 
+      password_hash: hashedPassword 
+    });
 
-    console.log("Новый пользователь:", newUser.rows[0]);
+    console.log("Новый пользователь:", newUser);
     
     // Возвращаем успешный JSON ответ
     res.status(201).json({ 
       success: true, 
       message: "User successfully registered",
-      user: newUser.rows[0]
+      user: newUser
     });
     
   } catch (err) {
