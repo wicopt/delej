@@ -41,6 +41,21 @@ const RegisterForm = () => {
                 onChange={handleChange}
               ></input>
             </div>
+            <div className=" mb-2">
+              <label htmlFor="username" className="form-label">
+                Никнейм
+              </label>
+              <input
+                type="text"
+                id="username"
+                autoComplete="off"
+                placeholder="Введите ваш никнейм"
+                required
+                className="form-control"
+                value={formData.username}
+                onChange={handleChange}
+              ></input>
+            </div>
             <div className="mb-2">
               <label htmlFor="password" className="form-label">
                 Пароль
@@ -62,12 +77,12 @@ const RegisterForm = () => {
               </label>
               <input
                 type="password"
-                id="confirmPassword"
+                id="password2"
                 autoComplete="off"
                 placeholder="Повторите пароль"
                 required
                 className="form-control"
-                value={formData.confirmPassword}
+                value={formData.password2}
                 onChange={handleChange}
               ></input>
             </div>

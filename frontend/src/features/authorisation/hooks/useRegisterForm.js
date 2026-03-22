@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 export const useRegisterForm = () => {
   const [formData, setFormData] = useState({
     email: "",
-    name: "",
+    username: "",
+    name:"",
     password: "",
-    confirmPassword: "",
+    password2: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,14 +20,14 @@ export const useRegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.password2) {
       setError("Пароли не совпадают");
       return;
     }
 
     setLoading(true);
     try {
-      const { confirmPassword, ...userData } = formData;
+      const {...userData } = formData;
       await register(userData);
       navigate("/EventsPage");
     } catch (err) {

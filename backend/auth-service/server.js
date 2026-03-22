@@ -27,6 +27,7 @@ app.get('/users', async (req, res) => {
 app.use("/api/auth/register", registrationRoutes);
 app.use("/api/auth/login", loginRoutes);
 
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 }

@@ -17,7 +17,7 @@ export const useLoginForm = () => {
     setLoading(true);
     try {
       await login({ email, password, rememberMe });
-      navigate("/dashboard");
+      navigate("/EventsPage");
     } catch (err) {
       setError(err.response?.data?.message || "Ошибка входа");
     } finally {

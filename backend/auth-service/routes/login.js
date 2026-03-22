@@ -18,7 +18,7 @@ const login = async (username, password) => {
 }
 router.post("/", async (req, res) => {
     let {
-        username,
+        email,
         password
     } = req.body;
 
@@ -26,13 +26,14 @@ router.post("/", async (req, res) => {
 
     console.log("Данные из формы:", req.body);
     // Валидация
-    if (!password || !username) {
+    if (!password || !email) {
         errors.push({ message: "Please enter all required fields" });
     }
 
     try {
-        const user = await login(username, password);
+        const user = await login(email, password);
         const token = createToken(user.user_id)
+        console.log("вошел:", user.user_id);
         res.status(200).json({ 
             user_id: user.user_id, 
             token: token
