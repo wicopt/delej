@@ -12,7 +12,7 @@ A banking application built with microservices architecture.
 
 | Service Name        | Port | Description                    |
 | ------------------- | ---- | ------------------------------ |
-| API Gateway         | 3000 | Entry point for all requests   |
+| API Gateway         | 8000 | Entry point for all requests   |
 | Auth Service        | 3001 | Authentication & authorization |
 | User Service        | 3002 | Account management             |
 | Event Service       | 3003 | Transaction processing         |
