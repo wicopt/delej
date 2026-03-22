@@ -2,7 +2,7 @@ const { pool } = require('../config/dbConfig');
 
 class UserModel {
   // ========== CREATE ==========
-  
+
   // Создать нового пользователя
   static async create({ username, name, email, password_hash }) {
     const query = `
@@ -16,7 +16,7 @@ class UserModel {
   }
 
   // ========== READ ==========
-  
+
   // Найти пользователя по ID
   static async findById(userId) {
     const query = 'SELECT * FROM users WHERE user_id = $1';
@@ -37,6 +37,11 @@ class UserModel {
     const result = await pool.query(query, [username]);
     return result.rows[0];
   }
+  static async findByEmailOrUsername(email) {
+    const query = 'SELECT * FROM users WHERE email = $1 or username = $1';
+    const result = await pool.query(query, [email]);
+    return result.rows[0];
+  }
 
   // Получить всех пользователей
   static async findAll() {
@@ -46,7 +51,7 @@ class UserModel {
   }
 
   // ========== UPDATE ==========
-  
+
   // Обновить данные пользователя
   static async update(userId, updates) {
     // Динамически строим запрос только для переданных полей
@@ -72,7 +77,7 @@ class UserModel {
       WHERE user_id = $${paramIndex}
       RETURNING user_id, username, name, email, created_at
     `;
-    
+
     const result = await pool.query(query, values);
     return result.rows[0];
   }
@@ -89,18 +94,8 @@ class UserModel {
     return result.rows[0];
   }
 
-  // Обновить время последнего входа
-  static async updateLastLogin(userId) {
-    const query = `
-      UPDATE users 
-      SET last_login = NOW() 
-      WHERE user_id = $1
-    `;
-    await pool.query(query, [userId]);
-  }
-
   // ========== DELETE ==========
-  
+
   // Удалить пользователя
   static async delete(userId) {
     const query = 'DELETE FROM users WHERE user_id = $1 RETURNING user_id';
@@ -109,7 +104,7 @@ class UserModel {
   }
 
   // ========== UTILS ==========
-  
+
   // Проверить, существует ли пользователь с таким email или username
   static async exists(email, username) {
     const query = `

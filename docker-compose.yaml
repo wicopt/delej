@@ -2,10 +2,11 @@
 services:
   auth-service:
     build: ./backend/auth-service
-    ports:
-      - "3001:3000"
+    expose:
+      - "3000"
     environment:
-       DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@auth-db:5432/${DB_NAME}
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@auth-db:5432/${DB_NAME}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
     develop:
       watch:
         - action: sync
@@ -18,7 +19,8 @@ services:
     depends_on:
       auth-db:
         condition: service_healthy
-
+    networks:
+      - internal  
   auth-db:
     image: postgres:16-alpine
     environment:
@@ -26,13 +28,15 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
       interval: 10s
       timeout: 5s
       retries: 5
     volumes:
       - auth-data:/var/lib/postgresql/data
-      - ./backend/auth-service/config/db-init:/docker-entrypoint-initdb.d 
+      - ./backend/auth-service/config/db-init:/docker-entrypoint-initdb.d
+    networks:
+      - internal  
   # frontend:
   #     build: ./frontend
   #     ports:
@@ -52,5 +56,39 @@ services:
   #           path: ./frontend/package.json
   #     depends_on:
   #       - auth-service
+  kong:
+    image: kong:latest
+    container_name: kong
+    volumes:
+      - ./kong/kong.yml:/usr/local/kong/declarative/kong.yml:ro
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001"
+    ports:
+      - "8000:8000" # ← Единая точка входа для всех API
+      - "8443:8443" # HTTPS (если понадобится)
+      - "127.0.0.1:8001:8001" # Admin API (только localhost)
+    depends_on:
+      - auth-service
+    healthcheck:
+      test: [ "CMD", "kong", "health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+      - public
+
+networks:
+  internal:
+    driver: bridge
+    internal: true # Нет доступа из интернета (только внутренние сервисы)
+  public:
+    driver: bridge # Kong имеет доступ наружу
 volumes:
   auth-data:

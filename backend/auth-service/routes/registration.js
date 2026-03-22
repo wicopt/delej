@@ -1,8 +1,8 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
+const router = express.Router();
 const UserModel = require('../models/UserModel');
-
+const { createToken } = require("../middleware/jwtToken");
 // JSON endpoint для регистрации
 router.post("/", async (req, res) => {
   let {
@@ -32,19 +32,18 @@ router.post("/", async (req, res) => {
 
   // Если есть ошибки - возвращаем JSON
   if (errors.length > 0) {
-    return res.status(400).json({ 
-      success: false, 
+    return res.status(400).json({
+      success: false,
       errors: errors,
       data: { username, name, email }
     });
   }
-
   // Если валидация прошла успешно
   try {
     // Проверка существующего пользователя
     const existingUser = await UserModel.findByEmail(email);
     const existingUsername = await UserModel.findByUsername(username);
-    
+
     if (existingUser || existingUsername) {
       let message = "";
       if (existingUser && existingUsername) {
@@ -54,9 +53,9 @@ router.post("/", async (req, res) => {
       } else {
         message = "Email already registered";
       }
-      
-      return res.status(400).json({ 
-        success: false, 
+
+      return res.status(400).json({
+        success: false,
         error: message,
         data: { username, name, email }
       });
@@ -66,27 +65,29 @@ router.post("/", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Создаем пользователя через модель
-    const newUser = await UserModel.create({ 
-      username, 
-      name, 
-      email, 
-      password_hash: hashedPassword 
+    const newUser = await UserModel.create({
+      username,
+      name,
+      email,
+      password_hash: hashedPassword
     });
 
     console.log("Новый пользователь:", newUser);
-    
+
+    const token = createToken(newUser.user_id);
     // Возвращаем успешный JSON ответ
-    res.status(201).json({ 
-      success: true, 
+    res.status(201).json({
+      success: true,
       message: "User successfully registered",
-      user: newUser
+      user: newUser,
+      token: token
     });
-    
+
   } catch (err) {
     console.error("Ошибка при регистрации:", err);
-    res.status(500).json({ 
-      success: false, 
-      error: "Database error during registration" 
+    res.status(500).json({
+      success: false,
+      error: "Database error during registration"
     });
   }
 });
