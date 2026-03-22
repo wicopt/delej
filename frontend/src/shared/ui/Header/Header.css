@@ -1,0 +1,29 @@
+.header {
+  background: var(--accent-color);
+  padding: 0 2em;
+  padding-top: 0.3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-accent-button-color);
+}
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.logoContainer.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+.logoText {
+  font-size: 1.5em;
+  align-self: self-end;
+  white-space: nowrap; /* чтобы текст не переносился */
+  padding-bottom: 0.2em;
+}
+
+.logoImage {
+  height: clamp(40px, 5vw, 90px);
+  width: auto;
+}

@@ -3,7 +3,7 @@ import LoginForm from '../features/authorisation/components/LoginForm.jsx';
 
 const LoginPage = ()=>{
     return(
-        <div className='d-flex justify-content-center align-items-center vh-100'>
+        <div className='d-flex justify-content-center align-items-start pt-3'>
         <LoginForm/>
         </div>
     )

@@ -1,12 +1,16 @@
 import React from "react";
-import Button from '../../../shared/ui/Button';
-const LoginForm = ({ onSuccess }) => {
+import Button from "../../../shared/ui/Button";
+import { useRegisterForm } from "../hooks/useRegisterForm";
+import { Link } from "react-router-dom";
+const RegisterForm = () => {
+  const { formData, error, loading, handleChange, handleSubmit } =
+    useRegisterForm();
   return (
     <div className="container">
       <div className="d-flex justify-content-center ">
-        <div className=" p-3 rounded-2 shadow fit-content">
+        <div className="col-8 col-sm-8 col-md-6 col-lg-4">
           <h1 className="text-center mb-3 ">Регистрация</h1>
-          <form >
+          <form onSubmit={handleSubmit}>
             <div className=" mb-2">
               <label htmlFor="email" className="form-label">
                 Email
@@ -18,6 +22,8 @@ const LoginForm = ({ onSuccess }) => {
                 placeholder="Введите почту"
                 required
                 className="form-control"
+                value={formData.email}
+                onChange={handleChange}
               ></input>
             </div>
             <div className=" mb-2">
@@ -31,6 +37,8 @@ const LoginForm = ({ onSuccess }) => {
                 placeholder="Введите ваше имя"
                 required
                 className="form-control"
+                value={formData.name}
+                onChange={handleChange}
               ></input>
             </div>
             <div className="mb-2">
@@ -44,9 +52,11 @@ const LoginForm = ({ onSuccess }) => {
                 placeholder="Введите пароль"
                 required
                 className="form-control"
+                value={formData.password}
+                onChange={handleChange}
               ></input>
             </div>
-                        <div className="mb-4">
+            <div className="mb-4">
               <label htmlFor="password" className="form-label">
                 Повторите пароль
               </label>
@@ -57,16 +67,22 @@ const LoginForm = ({ onSuccess }) => {
                 placeholder="Повторите пароль"
                 required
                 className="form-control"
+                value={formData.confirmPassword}
+                onChange={handleChange}
               ></input>
             </div>
-            <div className="d-flex flex-wrap gap-2 align-items-center ">
-              <Button variant="secondary"className="mb-2 ">Отмена</Button>
-            <Button type="submit" className="mb-2 ">Зарегистрироваться</Button></div>
-            </form>
-    
+            <div className="d-flex justify-content-between align-items-center ">
+              <Link to="/" className="custom-button custom-button--secondary">
+                Отмена{" "}
+              </Link>
+              <Button type="submit" className="">
+                Зарегистрироваться
+              </Button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
 };
-export default LoginForm;
+export default RegisterForm;

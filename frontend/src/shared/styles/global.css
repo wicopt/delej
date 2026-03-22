@@ -1,5 +1,4 @@
 @import './variables.css';
-/* Глобальные стили для проекта, их можно дополнять и менять по желанию */
 
 *,
 *::before,
@@ -35,7 +34,6 @@ picture {
 
 button,
 a {
-  color: currentColor;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -44,7 +42,6 @@ a {
 button,
 button:active,
 button:focus {
-  outline: none;        /* убирает контур фокуса (обычно синий) */
   background-color: transparent; 
 }
 input, textarea, select, button {
@@ -56,4 +53,8 @@ input, textarea, select, button {
 
 :focus-visible {
   outline: 2px solid rgb(123, 123, 224);
+}
+ .form-check-input:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
 }
