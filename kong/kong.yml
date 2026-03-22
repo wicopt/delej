@@ -1,0 +1,83 @@
+_format_version: "3.0"
+_transform: true
+
+# ========== СЕРВИСЫ ==========
+services:
+  # Твой auth-service
+  - name: auth-service
+    url: http://auth-service:3000
+    plugins:
+      # Включаем CORS для фронтенда
+      - name: cors
+        config:
+          origins:
+            - "*"
+          methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+          headers:
+            - Accept
+            - Authorization
+            - Content-Type
+          credentials: true
+      
+      # Лимит запросов для публичных эндпоинтов
+      - name: rate-limiting
+        config:
+          minute: 30
+          policy: local
+
+# ========== МАРШРУТЫ ==========
+routes:
+  # Публичные эндпоинты auth-service
+  - name: auth-test
+    service: auth-service
+    paths:
+      - /
+    methods:
+      - GET
+    strip_path: false
+
+  - name: auth-login
+    service: auth-service
+    paths:
+      - /api/auth/login
+    methods:
+      - POST
+    strip_path: false
+  
+  - name: auth-register
+    service: auth-service
+    paths:
+      - /api/auth/register
+    methods:
+      - POST
+    strip_path: false
+  
+  - name: auth-refresh
+    service: auth-service
+    paths:
+      - /api/auth/refresh
+    methods:
+      - POST
+    strip_path: false
+  
+  - name: auth-logout
+    service: auth-service
+    paths:
+      - /api/auth/logout
+    methods:
+      - POST
+    strip_path: false
+  
+  # Healthcheck (опционально)
+  - name: auth-health
+    service: auth-service
+    paths:
+      - /api/v1/health
+    methods:
+      - GET
+    strip_path: false
