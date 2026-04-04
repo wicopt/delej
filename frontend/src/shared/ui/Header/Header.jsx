@@ -4,8 +4,7 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 const Header = () => {
   const location = useLocation();
-  const isAuthPage =
-    location.pathname === "/" || location.pathname === "/RegisterPage";
+  const isAuthPage = location.pathname === "/" || location.pathname === "/RegisterPage";
   return (
     <header className="header">
       <div className={`logoContainer ${isAuthPage ? "centered" : ""}`}>
@@ -15,17 +14,17 @@ const Header = () => {
             <span className="logoText ">делЁЖ</span>
           </>
         ) : (
-          <Link to="/" className="logoLink">
+          <Link to="/EventsPage" className="logoLink">
             <img src={logo} alt="Логотип" className="logoImage" />
             <span className="logoText ">делЁЖ</span>
           </Link>
-        )}</div>
-        {!isAuthPage && (
-          <nav>
-            <Link to="/Events"></Link>
-          </nav>
         )}
-      
+      </div>
+      {!isAuthPage && (
+        <nav>
+          <Link to="/"></Link>
+        </nav>
+      )}
     </header>
   );
 };

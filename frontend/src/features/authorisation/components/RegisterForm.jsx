@@ -8,10 +8,11 @@ const RegisterForm = () => {
   return (
     <div className="container">
       <div className="d-flex justify-content-center ">
-        <div className="col-8 col-sm-8 col-md-6 col-lg-4">
+        <div className="col-11 col-sm-10 col-md-6 col-lg-4">
           <h1 className="text-center mb-3 ">Регистрация</h1>
           <form onSubmit={handleSubmit}>
             <div className=" mb-2">
+              {error && ( <div className="error mb-2 d-flex justify-content-center">{error}</div>)}
               <label htmlFor="email" className="form-label">
                 Email
               </label>
@@ -72,7 +73,7 @@ const RegisterForm = () => {
               ></input>
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="form-label">
+              <label htmlFor="password2" className="form-label">
                 Повторите пароль
               </label>
               <input

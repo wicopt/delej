@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import EventsPage from "../pages/EventsPage.jsx";
 import Layout from "../shared/ui/Layout/Layout.jsx";
+/*import '../shared/styles/global.css';*/
 
 function App() {
   return (

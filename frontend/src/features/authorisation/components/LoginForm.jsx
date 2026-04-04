@@ -18,15 +18,16 @@ const LoginForm = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className=" col-8 col-sm-8 col-md-6 col-lg-4 ">
+        <div className=" col-11 col-sm-10 col-md-6 col-lg-4 ">
           <h1 className="text-center mb-3">Авторизация</h1>
           <form onSubmit={handleSubmit}>
+            {error && ( <div className="error mb-2 d-flex justify-content-center">{error}</div>)}
             <div className=" mb-2">
               <label htmlFor="email" className="form-label">
-                Email
+                Email или никнейм
               </label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 autoComplete="off"
                 placeholder="Введите почту"
@@ -68,7 +69,7 @@ const LoginForm = () => {
             </div>
             <div className="d-flex gap-2 mb-2">
               <p>Забыли пароль? </p>
-              <a href="/forgotpassword">Восстановить</a>
+              <a href="/forgotpassword" className="link">Восстановить</a>
             </div>
             <div className="d-flex flex-column align-items-center mb-2">
               <Button type="submit" variant="primary" disabled={loading}>

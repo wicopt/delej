@@ -1,4 +1,4 @@
-@import './variables.css';
+@import "./variables.css";
 
 *,
 *::before,
@@ -8,8 +8,9 @@
 
 body {
   margin: 0 auto;
-  font-family: 'IBM Plex Mono';
+   font-family: 'Inter', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
 }
+
 
 h1,
 h2,
@@ -38,23 +39,38 @@ a {
   font-size: inherit;
   line-height: inherit;
   text-decoration: none;
+  color: currentColor;
 }
 button,
 button:active,
 button:focus {
-  background-color: transparent; 
+  background-color: transparent;
 }
-input, textarea, select, button {
-  font: inherit; 
-  border: none;  
-  outline: none; 
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  border: none;
+  outline: none;
 }
-
 
 :focus-visible {
   outline: 2px solid rgb(123, 123, 224);
 }
- .form-check-input:checked {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
+.form-check-input:checked {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.error {
+  inline-size: 100%;
+  border-radius: 0.3em;
+  padding: 0.5em 1em;
+  border: 1px solid var(--accent-color);
+}
+.link{
+  color:var(--accent-color);
+}
+.link:hover{
+  color:var(--accent-color-darker);
 }

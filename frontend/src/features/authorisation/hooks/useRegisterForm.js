@@ -6,7 +6,7 @@ export const useRegisterForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     username: "",
-    name:"",
+    name: "",
     password: "",
     password2: "",
   });
@@ -27,11 +27,14 @@ export const useRegisterForm = () => {
 
     setLoading(true);
     try {
-      const {...userData } = formData;
+      const { ...userData } = formData;
       await register(userData);
+
       navigate("/EventsPage");
     } catch (err) {
-      setError(err.response?.data?.message || "Ошибка регистрации");
+      const errmsg = err.response?.data?.error || err.response?.data?.message;
+      setError(errmsg);
+      console.log(errmsg);
     } finally {
       setLoading(false);
     }

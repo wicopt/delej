@@ -37,27 +37,27 @@ services:
       - ./backend/auth-service/config/db-init:/docker-entrypoint-initdb.d
     networks:
       - internal  
-  frontend:
-      build: ./frontend
-      ports:
-        - "3000:3000"  # или 5173 для Vite, или 3000 для CRA
-      environment:
-        - REACT_APP_API_URL=http://localhost:8000/api   # URL бэкенда
-        - CHOKIDAR_USEPOLLING=true  # для hot-reload в Docker
-        - WATCHPACK_POLLING=true    # для webpack 5+
-      develop:
-        watch:
-          - action: sync
-            path: ./frontend
-            target: /app
-            ignore:
-              - node_modules/
-          - action: rebuild
-            path: ./frontend/package.json
-      depends_on:
-        - auth-service
-      networks:
-      - public
+  # frontend:
+  #     build: ./frontend
+  #     ports:
+  #       - "3000:3000"  # или 5173 для Vite, или 3000 для CRA
+  #     environment:
+  #       - REACT_APP_API_URL=http://localhost:8000/api   # URL бэкенда
+  #       - CHOKIDAR_USEPOLLING=true  # для hot-reload в Docker
+  #       - WATCHPACK_POLLING=true    # для webpack 5+
+  #     develop:
+  #       watch:
+  #         - action: sync
+  #           path: ./frontend
+  #           target: /app
+  #           ignore:
+  #             - node_modules/
+  #         - action: rebuild
+  #           path: ./frontend/package.json
+  #     depends_on:
+  #       - auth-service
+  #     networks:
+  #     - public
   kong:
     image: kong:latest
     container_name: kong
