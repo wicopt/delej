@@ -1,35 +1,12 @@
-# docker-compose.yml
+# docker-compose.auth.yaml
 services:
-  user-service:
-    build: ./backend/user-service
-    expose:
-      - "3000"
-    environment:
-      SPRING_DATASOURCE_URL: ${DATABASE_URL}
-      SPRING_DATASOURCE_USERNAME: ${DB_USER}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-      # Или если используете HikariCP
-      SPRING_DATASOURCE_HIKARI_JDBC_URL: ${DATABASE_URL}
-    develop:
-      watch:
-        - action: sync
-          path: ./backend/auth-service
-          target: /app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: ./backend/auth-service/package.json
-    depends_on:
-      auth-db:
-        condition: service_healthy
-    networks:
-      - public
+
   auth-service:
     build: ./backend/auth-service
     expose:
       - "3000"
     environment:
-      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@auth-db:5432/${USER_DB_NAME}
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@user-db:5432/${USER_DB_NAME}
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
     develop:
       watch:
@@ -41,7 +18,7 @@ services:
         - action: rebuild
           path: ./backend/auth-service/package.json
     depends_on:
-      auth-db:
+      user-db:
         condition: service_healthy
     networks:
       - internal  
@@ -64,45 +41,7 @@ services:
     networks:
       - internal 
       - public 
-  auth-db:
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_NAME}
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    ports:
-      - "15432:5432"
-    volumes:
-      - auth-data:/var/lib/postgresql/data
-      - ./backend/db-init/init-auth:/docker-entrypoint-initdb.d
-    networks:
-      - internal  
-  frontend:
-      build: ./frontend
-      ports:
-        - "3000:3000"  # или 5173 для Vite, или 3000 для CRA
-      environment:
-        - REACT_APP_API_URL=http://localhost:8000/api   # URL бэкенда
-        - CHOKIDAR_USEPOLLING=true  # для hot-reload в Docker
-        - WATCHPACK_POLLING=true    # для webpack 5+
-      develop:
-        watch:
-          - action: sync
-            path: ./frontend
-            target: /app
-            ignore:
-              - node_modules/
-          - action: rebuild
-            path: ./frontend/package.json
-      depends_on:
-        - auth-service
-      networks:
-      - public
+
   kong:
     image: kong:latest
     container_name: kong
