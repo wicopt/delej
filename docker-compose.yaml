@@ -1,11 +1,35 @@
 # docker-compose.yml
 services:
+  user-service:
+    build: ./backend/user-service
+    expose:
+      - "3000"
+    environment:
+      SPRING_DATASOURCE_URL: ${DATABASE_URL}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      # Или если используете HikariCP
+      SPRING_DATASOURCE_HIKARI_JDBC_URL: ${DATABASE_URL}
+    develop:
+      watch:
+        - action: sync
+          path: ./backend/auth-service
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./backend/auth-service/package.json
+    depends_on:
+      auth-db:
+        condition: service_healthy
+    networks:
+      - public
   auth-service:
     build: ./backend/auth-service
     expose:
       - "3000"
     environment:
-      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@auth-db:5432/${DB_NAME}
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@auth-db:5432/${USER_DB_NAME}
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
     develop:
       watch:
@@ -21,6 +45,25 @@ services:
         condition: service_healthy
     networks:
       - internal  
+  user-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${USER_DB_NAME}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "15432:5432"
+    volumes:
+      - user-data:/var/lib/postgresql/data
+      - ./backend/db-init/init-user:/docker-entrypoint-initdb.d
+    networks:
+      - internal 
+      - public 
   auth-db:
     image: postgres:16-alpine
     environment:
@@ -32,9 +75,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "15432:5432"
     volumes:
       - auth-data:/var/lib/postgresql/data
-      - ./backend/auth-service/config/db-init:/docker-entrypoint-initdb.d
+      - ./backend/db-init/init-auth:/docker-entrypoint-initdb.d
     networks:
       - internal  
   # frontend:
@@ -94,3 +139,4 @@ networks:
     driver: bridge # Kong имеет доступ наружу
 volumes:
   auth-data:
+  user-data:

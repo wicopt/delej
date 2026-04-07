@@ -17,13 +17,13 @@
   margin-right: auto;
 }
 .logoText {
-  font-size: 1.5em;
+  font-size: calc(16px + 8 *((100vw - 320px)/960));
   align-self: self-end;
   white-space: nowrap; /* чтобы текст не переносился */
-  padding-bottom: 0.2em;
+  padding-bottom: calc(5px + 5*((100vw - 320px)/960));
 }
 
 .logoImage {
-  height: clamp(40px, 5vw, 90px);
+  height: clamp(40px, 5vw, 80px);
   width: auto;
 }

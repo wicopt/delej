@@ -19,7 +19,7 @@ export const useLoginForm = () => {
       await login({ email, password, rememberMe });
       navigate("/EventsPage");
     } catch (err) {
-      setError(err.response?.data?.message || "Ошибка входа");
+      setError(err.response?.data?.message || "Проверьте введенные данные");
     } finally {
       setLoading(false);
     }

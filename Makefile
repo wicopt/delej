@@ -1,5 +1,7 @@
 up:
 	docker compose up --build -d
+auth:
+	docker compose -f docker-compose.auth.yaml up --watch
 
 dev:
 	docker compose up --watch

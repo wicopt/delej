@@ -6,7 +6,7 @@ class UserModel {
   // Создать нового пользователя
   static async create({ username, name, email, password_hash }) {
     const query = `
-      INSERT INTO users (username, name, email, password_hash)
+      INSERT INTO app_user (username, name, email, password_hash)
       VALUES ($1, $2, $3, $4)
       RETURNING user_id, username, name, email
     `;
@@ -19,33 +19,33 @@ class UserModel {
 
   // Найти пользователя по ID
   static async findById(userId) {
-    const query = 'SELECT * FROM users WHERE user_id = $1';
+    const query = 'SELECT * FROM app_user WHERE user_id = $1';
     const result = await pool.query(query, [userId]);
     return result.rows[0];
   }
 
   // Найти пользователя по email
   static async findByEmail(email) {
-    const query = 'SELECT * FROM users WHERE email = $1';
+    const query = 'SELECT * FROM app_user WHERE email = $1';
     const result = await pool.query(query, [email]);
     return result.rows[0];
   }
 
   // Найти пользователя по username
   static async findByUsername(username) {
-    const query = 'SELECT * FROM users WHERE username = $1';
+    const query = 'SELECT * FROM app_user WHERE username = $1';
     const result = await pool.query(query, [username]);
     return result.rows[0];
   }
   static async findByEmailOrUsername(email) {
-    const query = 'SELECT * FROM users WHERE email = $1 or username = $1';
+    const query = 'SELECT * FROM app_user WHERE email = $1 or username = $1';
     const result = await pool.query(query, [email]);
     return result.rows[0];
   }
 
   // Получить всех пользователей
   static async findAll() {
-    const query = 'SELECT user_id, username, name, email, created_at FROM users ORDER BY created_at DESC';
+    const query = 'SELECT user_id, username, name, email, created_at FROM app_user ORDER BY created_at DESC';
     const result = await pool.query(query);
     return result.rows;
   }
@@ -72,7 +72,7 @@ class UserModel {
 
     values.push(userId);
     const query = `
-      UPDATE users 
+      UPDATE app_user 
       SET ${fields.join(', ')} 
       WHERE user_id = $${paramIndex}
       RETURNING user_id, username, name, email, created_at
@@ -85,7 +85,7 @@ class UserModel {
   // Обновить только пароль
   static async updatePassword(userId, newPasswordHash) {
     const query = `
-      UPDATE users 
+      UPDATE app_user 
       SET password_hash = $1 
       WHERE user_id = $2
       RETURNING user_id
@@ -98,7 +98,7 @@ class UserModel {
 
   // Удалить пользователя
   static async delete(userId) {
-    const query = 'DELETE FROM users WHERE user_id = $1 RETURNING user_id';
+    const query = 'DELETE FROM app_user WHERE user_id = $1 RETURNING user_id';
     const result = await pool.query(query, [userId]);
     return result.rows[0];
   }
@@ -109,8 +109,8 @@ class UserModel {
   static async exists(email, username) {
     const query = `
       SELECT 
-        EXISTS(SELECT 1 FROM users WHERE email = $1) as email_exists,
-        EXISTS(SELECT 1 FROM users WHERE username = $2) as username_exists
+        EXISTS(SELECT 1 FROM app_user WHERE email = $1) as email_exists,
+        EXISTS(SELECT 1 FROM app_user WHERE username = $2) as username_exists
     `;
     const result = await pool.query(query, [email, username]);
     return result.rows[0];
@@ -120,7 +120,7 @@ class UserModel {
   static async searchByName(searchTerm) {
     const query = `
       SELECT user_id, username, name, email 
-      FROM users 
+      FROM app_user 
       WHERE name ILIKE $1 OR username ILIKE $1
       ORDER BY name
       LIMIT 20
