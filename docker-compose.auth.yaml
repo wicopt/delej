@@ -33,14 +33,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    ports:
-      - "15432:5432"
     volumes:
       - user-data:/var/lib/postgresql/data
       - ./backend/db-init/init-user:/docker-entrypoint-initdb.d
     networks:
       - internal 
-      - public 
 
   kong:
     image: kong:latest
