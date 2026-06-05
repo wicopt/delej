@@ -2,103 +2,109 @@ import React from "react";
 import Button from "../../../shared/ui/Button";
 import { useRegisterForm } from "../hooks/useRegisterForm";
 import { Link } from "react-router-dom";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { FcGoogle } from "react-icons/fc";
+import "./LoginFormStyle.css";
+
 const RegisterForm = () => {
   const { formData, error, loading, handleChange, handleSubmit } =
     useRegisterForm();
   return (
-    <div className="container">
-      <div className="d-flex justify-content-center ">
-        <div className="col-11 col-sm-10 col-md-6 col-lg-4">
-          <h1 className="text-center mb-3 ">Регистрация</h1>
-          <form onSubmit={handleSubmit}>
-            <div className=" mb-2">
-              {error && ( <div className="error mb-2 d-flex justify-content-center">{error}</div>)}
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                autoComplete="off"
-                placeholder="Введите почту"
-                required
-                className="form-control"
-                value={formData.email}
-                onChange={handleChange}
-              ></input>
-            </div>
-            <div className=" mb-2">
-              <label htmlFor="name" className="form-label">
-                Имя пользователя
-              </label>
-              <input
-                type="text"
-                id="name"
-                autoComplete="off"
-                placeholder="Введите ваше имя"
-                required
-                className="form-control"
-                value={formData.name}
-                onChange={handleChange}
-              ></input>
-            </div>
-            <div className=" mb-2">
-              <label htmlFor="username" className="form-label">
-                Никнейм
-              </label>
-              <input
-                type="text"
-                id="username"
-                autoComplete="off"
-                placeholder="Введите ваш никнейм"
-                required
-                className="form-control"
-                value={formData.username}
-                onChange={handleChange}
-              ></input>
-            </div>
-            <div className="mb-2">
-              <label htmlFor="password" className="form-label">
-                Пароль
-              </label>
-              <input
-                type="password"
-                id="password"
-                autoComplete="off"
-                placeholder="Введите пароль"
-                required
-                className="form-control"
-                value={formData.password}
-                onChange={handleChange}
-              ></input>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="password2" className="form-label">
-                Повторите пароль
-              </label>
-              <input
-                type="password"
-                id="password2"
-                autoComplete="off"
-                placeholder="Повторите пароль"
-                required
-                className="form-control"
-                value={formData.password2}
-                onChange={handleChange}
-              ></input>
-            </div>
-            <div className="d-flex justify-content-between align-items-center ">
-              <Link to="/" className="custom-button custom-button--secondary">
-                Отмена{" "}
-              </Link>
-              <Button type="submit" className="">
-                Зарегистрироваться
-              </Button>
-            </div>
-          </form>
-        </div>
+    <form onSubmit={handleSubmit}>
+      <div className=" mb-2">
+        {error && (
+          <div className="error mb-2 d-flex justify-content-center">
+            {error}
+          </div>
+        )}
+        <FloatingLabel label="Email" htmlFor="email">
+          <Form.Control
+            type="email"
+            id="email"
+            autoComplete="off"
+            placeholder="Введите почту"
+            required
+            className="input"
+            size="sm"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
       </div>
-    </div>
+      <div className=" mb-2">
+        <FloatingLabel label="имя" htmlFor="name">
+          <Form.Control
+            type="text"
+            id="name"
+            autoComplete="off"
+            placeholder="Введите имя"
+            required
+            className="input"
+            size="sm"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
+      </div>
+      <div className=" mb-2">
+        <FloatingLabel label="никнейм" htmlFor="username">
+          <Form.Control
+            type="text"
+            id="username"
+            autoComplete="off"
+            placeholder="Введите никнейм"
+            required
+            className="input"
+            size="sm"
+            value={formData.username}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
+      </div>
+      <div className="mb-2">
+        <FloatingLabel label="пароль" htmlFor="password">
+          <Form.Control
+            type="password"
+            id="password"
+            autoComplete="off"
+            placeholder="Введите пароль"
+            required
+            className="input"
+            size="sm"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
+      </div>
+      <div className="mb-4">
+        <FloatingLabel label="повторите пароль" htmlFor="password2">
+          <Form.Control
+            type="password"
+            id="password2"
+            autoComplete="off"
+            placeholder="Введите пароль"
+            required
+            className="input"
+            size="sm"
+            value={formData.password2}
+            onChange={handleChange}
+          />
+        </FloatingLabel>
+      </div>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <Button type="submit" className="">
+          Зарегистрироваться
+        </Button>
+      </div>
+      <div className="line-horisontal mb-4"></div>
+      <div className="d-flex flex-column align-items-center gap-2">
+        <button className="google-button">
+          <FcGoogle size={24} />
+          <span>Продолжить с Google</span>
+        </button>
+      </div>
+    </form>
   );
 };
 export default RegisterForm;

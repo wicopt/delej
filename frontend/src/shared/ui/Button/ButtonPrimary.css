@@ -1,7 +1,9 @@
 .custom-button {
-  padding: 0.2em 1em;
+  padding: 0.5em 0em;
+  width: 100%;
+  text-align: center;
   border: none;
-  border-radius: 30px;
+  border-radius: 7px;
   font-size: clamp(0.5em, 1em, 2em);
   text-decoration: none;
   display: inline-block;
@@ -20,7 +22,49 @@
   color: var(--text-basic-button-color);
 }
 .custom-button--secondary:hover,
-.custom-button--secondary:focus{
+.custom-button--secondary:focus {
   background-color: var(--basic-color-darker);
   color: var(--text-basic-button-color);
+}
+.custom-button--secondary2 {
+  padding: 0;
+  width: fit-content;
+  background-color: transparent;
+  color: var(--accent-color);
+  border: none;
+  font-size: clamp(0.5em, 1.5em, 2em);
+}
+.custom-button--secondary2:hover,
+.custom-button--secondary2:focus {
+  color: var(--accent-color-darker);
+  background-color: transparent;
+}
+.custom-button--with-borders {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: var(--padding-small);
+  border: none;
+  color: var(--accent-color-darker);
+  box-shadow: var(--shadow-small);
+    padding-bottom: var(--padding-large);
+}
+.custom-button--with-borders:hover,
+.custom-button--with-borders:focus {
+  border: none;
+  color: var(--accent-color-dark);
+}
+.custom-button-selection{
+  background-color: transparent;
+  border-radius: var(--border-radius-medium);
+  height: fit-content;
+  padding: 0 var(--padding-small);
+  box-shadow: var(--shadow-small);
+  transition: transform 0.3s ease; 
+}
+.custom-button-selection:hover, .custom-button-selection:focus{
+transform: scale(0.9); 
+}
+.custom-button-selection.active{
+  background-color: var(--color-okay);
 }

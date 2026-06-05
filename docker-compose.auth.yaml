@@ -8,15 +8,6 @@ services:
     environment:
       DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@user-db:5432/${USER_DB_NAME}
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
-    develop:
-      watch:
-        - action: sync
-          path: ./backend/auth-service
-          target: /app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: ./backend/auth-service/package.json
     depends_on:
       user-db:
         condition: service_healthy
@@ -77,5 +68,4 @@ networks:
   public:
     driver: bridge # Kong имеет доступ наружу
 volumes:
-  auth-data:
   user-data:

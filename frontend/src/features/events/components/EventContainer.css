@@ -1,0 +1,21 @@
+.event-list {
+  height: 480px;
+  overflow-y: auto;
+  display: grid;
+  gap: var(--gap-medium);
+  min-width: fit-content;
+  scrollbar-width: none;
+  padding: var(--padding-small);
+  padding-top: var(--padding-medium);
+}
+.event-list-compact{
+  height: 200px;
+  overflow-y: auto;
+  display: flex;
+  gap: var(--gap-small);
+  min-width: fit-content;
+  scrollbar-width: none;
+  padding: var(--padding-small);
+  padding-top: var(--padding-medium);
+}
+

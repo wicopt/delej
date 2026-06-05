@@ -54,7 +54,48 @@ button {
   border: none;
   outline: none;
 }
-
+.input{
+  background-color: #F8F7FF;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 7px;
+}
+.input:focus, .input:hover{
+    background-color: #F8F7FF;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.input-secondary{
+  height: 40px;
+  padding:0 0 0 32px;
+  background-color: transparent;
+  border: none;
+  width:100%;
+  
+  outline: none;
+  box-shadow: var(--shadow-small);
+  border-radius: var(--border-radius-padding);
+}
+.input-creation{
+  height: 40px;
+  padding:0 8px;
+  background-color: transparent;
+  border: none;
+  width:100%;
+  outline: none;
+  box-shadow: var(--shadow-small);
+  border-radius: var(--border-radius-padding);
+}
+.line-horisontal{
+  background-color: var(--accent-color-darker);
+  height: 1px;
+  width:100%;
+}
+.form-floating > label::after{
+    background-color: transparent !important;/*я уже не знаю как избавиться от этого хаднего вона специфичность повышать не буду мне норм так*/
+}
 :focus-visible {
   outline: 2px solid rgb(123, 123, 224);
 }
@@ -69,8 +110,12 @@ button {
   border: 1px solid var(--accent-color);
 }
 .link{
-  color:var(--accent-color);
+  color:var(--accent-color-darker);
 }
 .link:hover{
   color:var(--accent-color-darker);
+}
+/*Отступы кастомные*/
+.margin-bottom-middle{
+  margin-bottom:var(--margin-middle-32)
 }

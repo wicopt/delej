@@ -1,0 +1,26 @@
+.google-button {
+    display: flex;
+  border: 1px solid var(--accent-color-darker);
+  border-radius: 7px;
+  padding: 0.5em 0em;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  font-size: clamp(0.5em, 1em, 2em);
+  text-decoration: none;
+  gap:10px;
+}
+.google-button:hover, .google-button:focus {
+    background-color: var(--accent-color-light);
+}
+.auth-tab{
+  padding:0 0.5em;
+  font-size:clamp(1em, 1.3em, 1.8em);
+  color:var(--text-basic-button-color);
+}
+.active{
+    border-bottom: 1px solid var(--accent-color);
+}
+.auth-tab:hover{
+  color:var(--accent-color-darker);
+}

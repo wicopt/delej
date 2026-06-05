@@ -7,3 +7,6 @@ frontend/node_modules/
 Makefile
 .vscode
 mobile/
+docker-compose.auth.yaml
+.gitignore
+backend/

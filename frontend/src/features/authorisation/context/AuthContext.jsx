@@ -11,11 +11,18 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const token = localStorage.getItem("token") || sessionStorage.getItem('token');
+    const token = localStorage.getItem("token") || sessionStorage.getItem('token');console.log("TOKEN =", token);
     if (token) {
       getProfile()
-        .then((response) => setUser(response.data))
-        .catch(() => {
+        .then((response) => {
+        console.log(response.data);
+        setUser(response.data);
+      })
+        .catch((error) => {
+          
+    console.log("ERROR:", error);
+    console.log("RESPONSE:", error.response);
+
             localStorage.removeItem("token");
             sessionStorage.removeItem("token");
         })
@@ -30,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     const { token, user } = response.data;
     const storage = credentials.rememberMe ? localStorage : sessionStorage;
     storage.setItem("token", token);
+    console.log("TOKEN =", token);
     setUser(user);
     return user;
   };

@@ -1,0 +1,19 @@
+.horizontal-scroller {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.horizontal-scroller__content {
+  display: flex;
+  gap: 12px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  flex: 1;
+}
+
+.horizontal-scroller__content::-webkit-scrollbar {
+  display: none;
+}

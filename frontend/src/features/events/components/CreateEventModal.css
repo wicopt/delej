@@ -1,0 +1,60 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.button-add-participant-container {
+  width: 112px;
+  width: calc();
+}
+.participants-selector-container {
+  display: flex;
+  flex-direction: column;
+  max-height: var(--max-height-participant-selector);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.participants-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-small);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--padding-small);
+  flex-wrap: nowrap;
+  height: fit-content;
+}
+
+.participants-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.participants-row > * {
+  flex-shrink: 0;
+}
+
+.modal-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  padding: var(--padding-large) 100px;
+  border-radius: var(--border-radius-large);
+  min-width: 400px;
+  width: 60%;
+  min-height: fit-content;
+  max-height: 50vh;
+}
+.event-creation-container {
+  display: grid;
+  gap: 1.5em;
+}
+@media (width<=1024px) {
+  .modal-window {
+    padding: var(--padding-large) 50px;
+  }
+}
