@@ -1,6 +1,6 @@
 .header {
   background: var(--accent-color);
-  padding: 0 2em;
+  padding: 0.5em 2em;
   color: var(--text-accent-button-color);
 }
 .logoContainer {
@@ -14,7 +14,7 @@
   font-size: calc(16px + 8 *((100vw - 320px)/960));
   align-self: self-end;
   white-space: nowrap; /* чтобы текст не переносился */
-  padding-bottom: calc(5px + 5*((100vw - 320px)/960));
+
 }
 
 .logoImage {

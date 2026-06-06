@@ -2,7 +2,7 @@
     width:100%;
     border-radius: var(--border-radius-medium);
     box-shadow: var(--shadow-large);
-    background-color: transparent;
+    background-color: var(--back-ground-color-cards);
     padding: var(--padding-medium);
     box-sizing: border-box;
 }

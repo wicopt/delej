@@ -12,7 +12,7 @@ import Button from "../../../shared/ui/Button";
 const FriendsContainer = ({ title }) => {
   const [tab, setTab] = useState("friends");
 
-  // Друзья и входящие заявки (данные из API)
+
   const {
     friends,
     requests,
@@ -22,7 +22,7 @@ const FriendsContainer = ({ title }) => {
     handleRemoveFriend,
   } = useFriendsRequests();
 
-  // Поиск + отправка заявки
+
   const { search, searchResult, searching, findFriends, handleSendRequest } =
     useFriendsSearch();
 
@@ -58,7 +58,7 @@ const FriendsContainer = ({ title }) => {
         </div>
       }
     >
-      <div className="d-grid gap-2 mt-3">
+      <div className="d-grid gap-2 mt-3 ">
         {/* Вкладка: Мои друзья */}
         {tab === "friends" && (
           <>
@@ -90,6 +90,7 @@ const FriendsContainer = ({ title }) => {
               value={search}
               placeholder="Введите никнейм"
               onChange={findFriends}
+              
             />
             {searching && (
               <p className="text-muted text-center small">Поиск...</p>
@@ -106,7 +107,6 @@ const FriendsContainer = ({ title }) => {
                   <FriendCard
                     key={user.userId}
                     friend={user}
-                    // Кнопка добавить вместо удалить
                     onAdd={user.requestSent ? null : handleSendRequest}
                     requestSent={user.requestSent}
                   />
@@ -126,7 +126,6 @@ const FriendsContainer = ({ title }) => {
                 Нет входящих заявок
               </p>
             ) : (
-              // БЫЛО: рендерился FriendCard вместо FriendRequestCard
               <FriendList
                 friends={requests}
                 renderFriend={(friend) => (

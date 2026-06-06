@@ -72,11 +72,11 @@ const EventsPage = () => {
         <h1>Добро пожаловать,{user?.name}</h1>
       </div>
       <div className="row g-3 g-lg-5 pt-4">
-        <div className="col-12 col-md-4 col-lg-4">
+        <div className="col-12 col-md-12 col-lg-4">
           <FriendsContainer title="Мои друзья" friends={eventsList2} />
         </div>
 
-        <div className="col-12 col-md-8 col-lg-8">
+        <div className="col-12 col-md-12 col-lg-8">
           <EventsContainer title="Все события" events={eventsList} showExpenses={true} className={"event-card"}/>
         </div>
       </div>

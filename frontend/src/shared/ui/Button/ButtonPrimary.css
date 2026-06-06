@@ -29,7 +29,7 @@
 .custom-button--secondary2 {
   padding: 0;
   width: fit-content;
-  background-color: transparent;
+  background-color: var(--back-ground-color-cards);
   color: var(--accent-color);
   border: none;
   font-size: clamp(0.5em, 1.5em, 2em);
@@ -37,7 +37,7 @@
 .custom-button--secondary2:hover,
 .custom-button--secondary2:focus {
   color: var(--accent-color-darker);
-  background-color: transparent;
+  background-color: var(--back-ground-color-cards);
 }
 .custom-button--with-borders {
   display: flex;
@@ -55,7 +55,7 @@
   color: var(--accent-color-dark);
 }
 .custom-button-selection{
-  background-color: transparent;
+  background-color: var(--back-ground-color-cards);
   border-radius: var(--border-radius-medium);
   height: fit-content;
   padding: 0 var(--padding-small);
@@ -67,4 +67,20 @@ transform: scale(0.9);
 }
 .custom-button-selection.active{
   background-color: var(--color-okay);
+}
+.custom-button-danger{
+  color:var(--color-danger);
+  width:var(--width-round-buttons);
+  height: var(--heigh-round-buttons);
+}
+.custom-button-danger:hover,.custom-button-cross:focus{
+  color: var(--color-danger-darker);
+}
+.custom-button-okay{
+    color:var(--color-okay);
+  width:var(--width-round-buttons);
+  height: var(--heigh-round-buttons);
+}
+.custom-button-okay:hover, .custom-button-okay:focus{
+  color:var(--color-okay-darker)
 }

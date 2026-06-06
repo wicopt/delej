@@ -11,7 +11,7 @@ import default_profile_picture from "../../../shared/assets/icons/default_profil
 const FriendCard = ({ friend, onRemove, onAdd, requestSent }) => {
   return (
     <Card className="friend-card">
-      <div className="d-flex justify-content-between align-items-center">
+      <div className="d-flex justify-content-between align-items-center w-100">
         <div className="d-flex gap-2 align-items-center justify-content-between w-100">
           <img
             src={friend.picture || default_profile_picture}
@@ -20,7 +20,7 @@ const FriendCard = ({ friend, onRemove, onAdd, requestSent }) => {
             height="36"
             style={{ borderRadius: "50%" }}
           />
-          <div>
+          <div >
             <p className="mb-0">{friend.name}</p>
             {friend.username && (
               <small className="text-muted">@{friend.username}</small>
@@ -30,15 +30,15 @@ const FriendCard = ({ friend, onRemove, onAdd, requestSent }) => {
 
         {/* Режим: список друзей */}
         {onRemove && (
-          <Button onClick={() => onRemove(friend.userId)}>✕</Button>
+          <Button onClick={() => onRemove(friend.userId)} variant="danger"><i class="bi bi-x-circle custom-danger-danger"></i></Button>
         )}
 
         {/* Режим: поиск */}
         {onAdd && !requestSent && (
-          <Button onClick={() => onAdd(friend.userId)}>+</Button>
+          <Button onClick={() => onAdd(friend.userId)} variant="okay"><i class="bi bi-plus-circle custom-button-okay"></i></Button>
         )}
         {requestSent && (
-          <span className="text-muted small">Запрос отправлен</span>
+          <span className="text-muted small"><i class="bi bi-check-circle custom-button-okay"></i></span>
         )}
       </div>
     </Card>

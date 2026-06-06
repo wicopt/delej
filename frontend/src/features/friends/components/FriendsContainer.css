@@ -1,5 +1,7 @@
 .search-wrapper {
   position: relative;
+    width: 100%;      /* ← добавь */
+  min-width: 0; 
 }
 
 .search-icon {

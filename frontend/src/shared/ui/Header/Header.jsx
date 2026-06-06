@@ -11,15 +11,17 @@ const Header = () => {
   return (
     <header className="header d-flex justify-content-between">
         {isAuthPage ? (
-          < div className="logoContainer d-flex align-items-center centered">
+          < div className="logoContainer d-flex align-items-center centered gap-1">
             <img src={logo} alt="Логотип" className="logoImage " />
             <span className="logoText ">делЁЖ</span>
           </div>
         ) : (
           <div className="d-flex justify-content-between align-items-center w-100">
+            
             <Link to="/EventsPage" className="logoLink">
+            <div className="d-flex justify-content-between align-items-center gap-2">
               <img src={logo} alt="Логотип" className="logoImage" />
-              <span className="logoText ">делЁЖ</span>
+              <span className="logoText mb-1">делЁЖ</span></div> 
             </Link>
             <div className=" d-flex justify-content-center gap-2">
               <Link to="/ProfilePage" className="">

@@ -6,6 +6,7 @@
     --basic-color:#D7D7DB;
     --basic-color-darker:#b7b7bf;
     --text-accent-button-color:white;
+    --back-ground-color-cards:white;
     --text-basic-button-color:#474343;
     --margin-middle-32:32px;
     --border-radius-medium:8px;
@@ -22,9 +23,13 @@
     --shadow-large:0 0 24px #b7b7bf;
     --card-min-height-for-medium:150px;
     --card-min-height-for-small:50px;
-    --border-accent: solid 2px #6e5bda;
+    --border-accent: solid 2px #9381FF;
     --border-accent-darker: solid 2px #503dbd;
 --border-basic:solid 2px #b7b7bf;
 --color-okay:#63D6A5;
+--color-okay-darker:#1e8b5c;
 --color-warning:#D93333;
+--color-warning-darker:#b42727;
+--width-round-buttons:30px;
+--heigh-round-buttons:30px;
 }

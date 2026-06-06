@@ -1,7 +1,7 @@
 .card-container {
   display:flex;
   border-radius: var(--border-radius-medium);
-  background-color: transparent;
+  background-color: var(--back-ground-color-cards);
   width: 100%;
   height: 100%;
   gap:0.5em;
