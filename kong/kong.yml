@@ -1,7 +1,29 @@
 _format_version: "3.0"
 
-# ========== СЕРВИСЫ ==========
 services:
+  - name: user-service
+    url: http://user-service:8080
+    plugins:
+      - name: key-auth  # Add authentication
+        config:
+          key_names:
+            - apikey
+          hide_credentials: true  # Remove apikey header before forwarding to service
+     
+    routes:
+      - name: users-routes
+        paths:
+          - /api/users
+        strip_path: false
+      - name: friend-requests-routes
+        paths:
+          - /api/friend-requests
+        strip_path: false
+      - name: friends-routes
+        paths:
+          - /api/friends
+        strip_path: false
+
   - name: auth-service
     url: http://auth-service:3000
     plugins:
@@ -9,6 +31,7 @@ services:
         config:
           origins:
             - "http://localhost:3000"
+            - "http://localhost:8080"  # Add frontend origins
           methods:
             - GET
             - POST
@@ -60,3 +83,15 @@ services:
           - GET
           - OPTIONS
         strip_path: false
+
+# Define consumers (users who can access the services)
+consumers:
+  - username: mary_user
+    keyauth_credentials:
+      - key: mary-secret-key-2024
+  - username: john_user
+    keyauth_credentials:
+      - key: john-secret-key-2024
+  - username: test_user
+    keyauth_credentials:
+      - key: test123

@@ -1,6 +1,6 @@
+
 # docker-compose.auth.yaml
 services:
-
   auth-service:
     build: ./backend/auth-service
     expose:
@@ -33,14 +33,17 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "15432:5432"
     volumes:
       - user-data:/var/lib/postgresql/data
       - ./backend/db-init/init-user:/docker-entrypoint-initdb.d
     networks:
       - internal 
+      - public 
 
   kong:
-    image: kong:latest
+    image: kong:3.0
     container_name: kong
     volumes:
       - ./kong/kong.yml:/usr/local/kong/declarative/kong.yml:ro
@@ -74,5 +77,4 @@ networks:
   public:
     driver: bridge # Kong имеет доступ наружу
 volumes:
-  auth-data:
   user-data:

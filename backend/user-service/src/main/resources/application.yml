@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: user-service
+  
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:15432/user-db}
+    username: ${SPRING_DATASOURCE_USERNAME:delej}
+    password: ${SPRING_DATASOURCE_PASSWORD:1234567890}
+    driver-class-name: org.postgresql.Driver  
+  
+  jpa:
+    database: POSTGRESQL  # ← Добавьте это
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect  
+        jdbc:
+          lob:
+            non_contextual_creation: true 
+
+server:
+  address: 0.0.0.0
+  port: 8080
+  servlet:
+    context-path: /api
+
+jwt:
+  secret: q1JBE17iCKMS67BkgSKTAvWGNUtpMe3YE9YfmNCxuow
+  expirationMs: 3600000

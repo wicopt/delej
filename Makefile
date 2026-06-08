@@ -1,24 +1,29 @@
 up:
-	docker compose up --build -d
+	docker compose -f docker-compose.user.yaml up --watch
+
+user:
+	docker compose -f docker-compose.user.yaml up --watch
+
 auth:
-	docker compose -f docker-compose.auth.yaml up --watch
+	docker compose -f docker-compose.user.yaml up --watch
 
 dev:
 	docker compose up --watch
 
 down:
-	docker compose down
+	docker compose -f docker-compose.user.yaml down
 
-logs:
-	docker compose logs -f
+re:
+	docker compose -f docker-compose.user.yaml restart user-service auth-service kong
 
-auth-logs:
-	docker compose logs -f auth-service
+db:
+	docker exec -it delej-delej-db-1 psql -U delej -d user-db
 
-db-logs:
-	docker compose logs -f auth-db
+java:
+	mvn clean package -DskipTests
 
-restart:
-	docker compose restart
-auth-db:
-	docker exec -it delej-auth-db-1  psql -U delej -d auth
+java-recompile:
+	mvn clean compile
+
+jar:
+	java -jar target/event-service-0.0.1-SNAPSHOT.jar
