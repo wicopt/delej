@@ -18,10 +18,19 @@
   border-bottom:var(--border-basic)
 }
 .event-card {
+  display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
   box-shadow: var(--shadow-medium);
   min-height: var(--card-min-height-for-medium);
+}
+.event-information-card{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow-medium);
+  padding: var(--padding-small);
 }
 .event-card-compact{
   width: 100%;
@@ -33,11 +42,22 @@
   height: fit-content;
 }
 .participant-card {
+  
+  display: flex;
   flex-direction: column;
   border: none;
   box-shadow:var(--shadow-small);
   align-items: center;
   padding-bottom: var(--padding-large);
+}
+.expense-card{
+  width: 100%;
+  display:flex;
+  transition: transform 0.2s ease;
+  box-shadow: var(--shadow-small);
+  align-items:center;
+  justify-content: space-between;
+  height: fit-content;
 }
 .header-of-container {
   display: flex;
@@ -49,6 +69,7 @@
 .friend-card:hover{
 border-bottom: var(--border-accent);
 }
+
 @media (width<=425px) {
   .event-card {
     min-height: var(--card-min-height-for-small);

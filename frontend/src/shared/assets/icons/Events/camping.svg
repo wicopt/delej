@@ -1,0 +1,31 @@
+<svg viewBox="0 0 52 53.4487" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52.000000" height="53.448730" fill="none">
+	<defs>
+		<g id="pixso_custom_effect_2">
+			<effect x="0.000000" y="4.000000" visibility="visible" fill="rgb(0,0,0)" fill-opacity="0.25" effectType="dropShadow" stdDeviation="4" radius="0" />
+		</g>
+		<filter id="filter_2" width="52.000000" height="53.448730" x="0.000000" y="0.000000" filterUnits="userSpaceOnUse" customEffect="url(#pixso_custom_effect_2)" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix" />
+			<feColorMatrix result="hardAlpha" in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0 " />
+			<feOffset dx="0.000000" dy="4.000000" in="hardAlpha" />
+			<feGaussianBlur stdDeviation="1.33333337" />
+			<feComposite k2="-1" k3="1" in2="hardAlpha" operator="out" />
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0 " />
+			<feBlend result="effect_dropShadow_1" in2="BackgroundImageFix" mode="normal" />
+			<feBlend result="shape" in="SourceGraphic" in2="effect_dropShadow_1" mode="normal" />
+		</filter>
+		<clipPath id="clipPath_2">
+			<rect width="51.000000" height="51.000000" x="0.500000" y="0.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clipPath_2)" filter="url(#filter_2)" customFrame="url(#clipPath_2)">
+		<rect id="Восход 3" width="51.000000" height="51.000000" x="0.500000" y="0.000000" />
+		<path id="Форма 13" d="M4.75 25.5L7.9375 25.5" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 14" d="M11.125 10.625L13.25 12.75" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 15" d="M26 4.25L26 7.4375" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 16" d="M15.375 25.5C15.375 19.6325 20.1325 14.875 26 14.875C31.8675 14.875 36.625 19.6325 36.625 25.5C36.625 29.0779 34.8567 32.2424 32.1466 34.1677" fill-rule="nonzero" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 17" d="M40.875 10.625L38.75 12.75" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 18" d="M47.25 25.5L44.0625 25.5" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 19" d="M40.8552 40.3559L39.134 38.6346" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+		<path id="Форма 20" d="M25.4687 29.75C22.2812 29.75 15.3751 29.9625 15.3751 32.9375C15.3751 35.9125 20.2687 35.9027 22.8124 36.125C24.9376 36.3106 28.6164 37.9184 28.125 40.375C27.0624 45.6875 10.0624 44.625 5.8125 44.625" fill-rule="nonzero" stroke="rgb(147,129,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.500000" />
+	</g>
+</svg>

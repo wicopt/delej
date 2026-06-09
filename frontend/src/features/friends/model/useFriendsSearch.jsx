@@ -26,6 +26,7 @@ export const useFriendsSearch = () => {
 
   // ДОБАВЛЕНО: функция отправки заявки прямо из поиска
   const handleSendRequest = async (toUserId) => {
+     console.log("Отправляю заявку, toUserId =", toUserId);
     await sendFriendRequest(toUserId);
     // Помечаем пользователя как "запрос отправлен"
     setSearchResult((prev) =>

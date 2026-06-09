@@ -9,8 +9,8 @@ export const createApi = (baseURL) => {
   });
 
   api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token")||
-  sessionStorage.getItem("token");
+        const token = sessionStorage.getItem("token") || localStorage.getItem("token");
+
 console.log("REQUEST URL:", config.baseURL + config.url);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

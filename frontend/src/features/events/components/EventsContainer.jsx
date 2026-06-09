@@ -3,12 +3,17 @@ import ContainerForEvents from "../../../shared/ui/Container";
 import EventCard from "./EventCard";
 import "./EventContainer.css";
 import Button from "../../../shared/ui/Button/Button";
-import { useCreateEventModal } from "../model/useCreateEventModal";
-import CreateEventModal from "./CreateEventModal";
+import { useCreateEventModal } from "../model/useCreateEventModal.jsx";
+import CreateEventModal from "./Creation/CreateEventModal.jsx";
+import { useEvents } from "../model/useEvents.jsx";
+import { useNavigate } from "react-router-dom";
+import { useFriendsRequests } from "../../friends/model/useFriendsRequest.jsx";
 
-const EventsContainer = ({ title, events, showExpenses, className }) => {
+const EventsContainer = ({ title, showExpenses, className }) => {
   const modal = useCreateEventModal();
-
+  const { events, loading, refetch } = useEvents();
+  const navigate = useNavigate();
+  const { friends } = useFriendsRequests();
   return (
     <>
       <ContainerForEvents
@@ -24,7 +29,13 @@ const EventsContainer = ({ title, events, showExpenses, className }) => {
           ) : null
         }
       >
-        {!showExpenses ? (
+        {loading ? (
+          <p className="text-muted text-center small">Загрузка...</p>
+        ) : events.length === 0 ? (
+          <p className="text-muted text-center small">
+            Нет событий. Создайте же впечатления!
+          </p>
+        ) : !showExpenses ? (
           <div className="event-list-compact">
             <div className="row g-2">
               {events.map((event) => (
@@ -36,7 +47,7 @@ const EventsContainer = ({ title, events, showExpenses, className }) => {
           </div>
         ) : (
           <>
-            <div className="event-list">
+            <div className="event-list h-auto">
               <div className="row g-2">
                 {events.map((event) => (
                   <div
@@ -47,6 +58,7 @@ const EventsContainer = ({ title, events, showExpenses, className }) => {
                       event={event}
                       showExpenses={showExpenses}
                       className={className}
+                      onClick={() => navigate(`/events/${event.eventId}`)}
                     />
                   </div>
                 ))}
@@ -66,6 +78,11 @@ const EventsContainer = ({ title, events, showExpenses, className }) => {
         setCurrency={modal.setCurrency}
         selectedFriends={modal.selectedFriends}
         setSelectedFriends={modal.setSelectedFriends}
+        onCreate={() => modal.handleCreate(refetch)}
+        isLoading={modal.isLoading}
+        iconId={modal.iconId}
+        setIconId={modal.setIconId}
+        friends={friends} 
       />{" "}
     </>
   );

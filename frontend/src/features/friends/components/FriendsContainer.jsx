@@ -21,7 +21,7 @@ const FriendsContainer = ({ title }) => {
     handleDecline,
     handleRemoveFriend,
   } = useFriendsRequests();
-
+console.log(" Компонент рендерится. requests:", requests, "loading:", loading);
 
   const { search, searchResult, searching, findFriends, handleSendRequest } =
     useFriendsSearch();
@@ -36,21 +36,21 @@ const FriendsContainer = ({ title }) => {
         <div className="d-flex gap-3 justify-content-between w-100">
           <Button
             onClick={() => setTab("friends")}
-            className={`custom-button-selection ${tab === "friends" ? "active" : ""}`}
+            className={`custom-button-selection w-100 ${tab === "friends" ? "active" : ""}`}
             variant="selection"
           >
             Друзья
           </Button>
           <Button
             onClick={() => setTab("search")}
-            className={`custom-button-selection ${tab === "search" ? "active" : ""}`}
+            className={`custom-button-selection w-100 ${tab === "search" ? "active" : ""}`}
             variant="selection"
           >
             Найти
           </Button>
           <Button
             onClick={() => setTab("requests")}
-            className={`custom-button-selection ${tab === "requests" ? "active" : ""}`}
+            className={`custom-button-selection w-100 ${tab === "requests" ? "active" : ""}`}
             variant="selection"
           >
             Заявки{requestsCount > 0 && ` (${requestsCount})`}
@@ -76,6 +76,7 @@ const FriendsContainer = ({ title }) => {
                     key={friend.userId}
                     friend={friend}
                     onRemove={handleRemoveFriend}
+                    className={"friend-card"}
                   />
                 )}
               />
@@ -126,6 +127,8 @@ const FriendsContainer = ({ title }) => {
                 Нет входящих заявок
               </p>
             ) : (
+               <>
+        <p className="small text-muted">Найдено заявок: {requests.length}</p>
               <FriendList
                 friends={requests}
                 renderFriend={(friend) => (
@@ -136,7 +139,7 @@ const FriendsContainer = ({ title }) => {
                     onDecline={handleDecline}
                   />
                 )}
-              />
+              /></>
             )}
           </>
         )}

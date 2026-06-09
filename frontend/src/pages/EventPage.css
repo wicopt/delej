@@ -1,0 +1,10 @@
+.container-event-page{
+    width:70%;
+    height:60%;
+    margin: 0 auto;
+    justify-content: center;
+}
+@media(width<=1024px){
+    .container-event-page{
+width:80%;}
+}

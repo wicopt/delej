@@ -20,6 +20,7 @@
 }
 .participants-row {
   display: flex;
+  
   justify-content: center;
   gap: var(--gap-small);
   overflow-x: auto;
@@ -48,6 +49,7 @@
   width: 60%;
   min-height: fit-content;
   max-height: 50vh;
+  height: var(--max-height-participant-selector);
 }
 .event-creation-container {
   display: grid;

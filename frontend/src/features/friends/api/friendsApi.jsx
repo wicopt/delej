@@ -25,6 +25,7 @@ export const getIncomingRequests = async () => {
  
 export const sendFriendRequest = async (toUserId) => {
   const response = await userApi.post("/friend-requests", { toUserId });
+  console.log("toUserId", toUserId);
   return response.data;
 };
  

@@ -32,11 +32,12 @@ export const useFriendsRequests = () => {
   }, []);
 
   const handleAccept = async (userId) => {
-    await acceptFriendRequest(userId);
+    const acceptedUser = await acceptFriendRequest(userId);
     // Убираем из заявок, добавляем в друзья
-    const accepted = requests.find((r) => r.userId === userId);
+    const accepted = requests.find((r) => r.userId === acceptedUser.userId);
     setRequests((prev) => prev.filter((r) => r.userId !== userId));
-    if (accepted) setFriends((prev) => [...prev, accepted]);
+   setFriends((prev) => [...prev, acceptedUser]);
+   console.log("Заявка принята:", acceptedUser);
   };
 
   const handleDecline = async (userId) => {

@@ -6,7 +6,7 @@ const FriendList = ({
     <div className="row g-2">
       {friends.map((friend) => (
         <div
-          key={friend.id}
+          key={friend.userId}
           className="col-12"
         >
           {renderFriend(friend)}

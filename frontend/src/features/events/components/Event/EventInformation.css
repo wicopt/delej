@@ -1,0 +1,29 @@
+.container-information {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+
+}
+.icon-card {
+  padding: var(--padding-large) var(--padding-medium);
+  display: flex;
+  gap: var(--gap-medium);
+}
+.event-name {
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+.text-base{
+    color: var(--text-basic-button-color);
+}
+.text-accent{
+    color:var(--accent-color)
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.shadow{
+    box-shadow: var(--shadow-medium);
+}

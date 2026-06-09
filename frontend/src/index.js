@@ -5,6 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/dist/css/bootstrap.min.css';/*сначала бутсрап потом свои, что бы label::after был важнее сполйлер не помогло */
 import './shared/styles/global.css';  
 import './shared/assets/fonts/fonts.css';  
+import { getEventIcon } from "./shared/assets/constants/EventIcons";
 
 import reportWebVitals from './reportWebVitals';
 

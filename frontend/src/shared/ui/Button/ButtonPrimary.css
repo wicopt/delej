@@ -47,40 +47,94 @@
   border: none;
   color: var(--accent-color-darker);
   box-shadow: var(--shadow-small);
-    padding-bottom: var(--padding-large);
+  padding-bottom: var(--padding-large);
 }
 .custom-button--with-borders:hover,
 .custom-button--with-borders:focus {
   border: none;
   color: var(--accent-color-dark);
 }
-.custom-button-selection{
+.custom-button--selection {
   background-color: var(--back-ground-color-cards);
   border-radius: var(--border-radius-medium);
   height: fit-content;
   padding: 0 var(--padding-small);
   box-shadow: var(--shadow-small);
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
-.custom-button-selection:hover, .custom-button-selection:focus{
-transform: scale(0.9); 
+.custom-button--selection:hover,
+.custom-button--selection:focus {
+  transform: scale(0.9);
 }
-.custom-button-selection.active{
+.custom-button--selection.active {
   background-color: var(--color-okay);
 }
-.custom-button-danger{
-  color:var(--color-danger);
-  width:var(--width-round-buttons);
+.custom-button--danger {
+  width: fit-content;
+  padding: 0;
+  color: var(--color-danger);
+  width: var(--width-round-buttons);
   height: var(--heigh-round-buttons);
+
 }
-.custom-button-danger:hover,.custom-button-cross:focus{
+.custom-button--danger:hover,
+.custom-button--cross:focus {
   color: var(--color-danger-darker);
 }
-.custom-button-okay{
-    color:var(--color-okay);
-  width:var(--width-round-buttons);
+.custom-button--okay {
+  width: fit-content;
+  color: var(--color-okay);
+  width: var(--width-round-buttons);
   height: var(--heigh-round-buttons);
 }
-.custom-button-okay:hover, .custom-button-okay:focus{
-  color:var(--color-okay-darker)
+.custom-button--okay:hover,
+.custom-button--okay:focus {
+  color: var(--color-okay-darker);
+}
+.custom-button--icon {
+  padding: var(--padding-small);
+  border: none;
+  box-shadow: var(--shadow-small);
+  width: fit-content;
+  background-color: var(--back-ground-color-cards);
+  color: var(--accent-color-darker);
+  border-radius: var(--border-radius-medium);
+}
+.custom-button--icon:hover,.custom-button--icon:focus {
+  transform: translateY(-8px);
+  transition: transform 0.2s ease;
+}
+.custom-button--done{
+  width:fit-content;
+  padding:0 var(--padding-small) ;
+  background-color: var(--color-okay);
+  border-radius: var(--border-radius-medium);
+}
+.custom-button--done:hover, .custom-button--done:focus{
+    background-color: var(--color-okay-darker);
+}
+.custom-button--selection-secondary {
+  padding: var(--padding-small);
+  border: none;
+  box-shadow: var(--shadow-small);
+  width: fit-content;
+  background-color: var(--accent-color);
+  border-radius: var(--border-radius-medium);
+  color: var(--back-ground-color-cards);
+}
+.custom-button--selection-secondary:hover,.custom-button--selection-secondary:focus{
+  background-color: var(--accent-color-darker);
+}
+.custom-button--not-selected {
+  padding: var(--padding-small);
+  border: none;
+  box-shadow: var(--shadow-small);
+  width: fit-content;
+  background-color: var(--back-ground-color-cards);
+  color: var(--accent-color-darker);
+  border-radius: var(--border-radius-medium);
+}
+.custom-button--not-selected:hover, .custom-button--not-selected:focus{
+    background-color: var(--accent-color);
+      color: var(--back-ground-color-cards);
 }

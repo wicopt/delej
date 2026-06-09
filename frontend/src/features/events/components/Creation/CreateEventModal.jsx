@@ -1,11 +1,12 @@
 import EventForm from "./EventForm";
 import ParticipantSelector from "./ParticipantSelector";
-import { useCreateEventModal } from "../model/useCreateEventModal";
-import './CreateEventModal.css';
+import "./CreateEventModal.css";
+
 const CreateEventModal = ({
   isOpen,
   onClose,
-  friends,step,
+  friends,
+  step,
   setStep,
 
   title,
@@ -16,14 +17,18 @@ const CreateEventModal = ({
 
   selectedFriends,
   setSelectedFriends,
+
+  onCreate,
+  isLoading,
+
+  iconId,
+  setIconId,
 }) => {
-  
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-window">
-
         {step === "form" && (
           <EventForm
             title={title}
@@ -32,9 +37,11 @@ const CreateEventModal = ({
             setCurrency={setCurrency}
             selectedFriends={selectedFriends}
             onClose={onClose}
-            onAddParticipants={() =>
-              setStep("participants")
-            }
+            onAddParticipants={() => setStep("participants")}
+            onCreate={onCreate}
+            isLoading={isLoading}
+            iconId={iconId}
+            setIconId={setIconId}
           />
         )}
 
@@ -46,7 +53,6 @@ const CreateEventModal = ({
             onBack={() => setStep("form")}
           />
         )}
-
       </div>
     </div>
   );

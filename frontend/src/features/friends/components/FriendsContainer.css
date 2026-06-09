@@ -1,6 +1,6 @@
 .search-wrapper {
   position: relative;
-    width: 100%;      /* ← добавь */
+    width: 100%;      
   min-width: 0; 
 }
 
